@@ -98,7 +98,25 @@ export const login = async (req, res) => {
       maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
     });
 
+    const cookies = await req.cookies;
+
     res.json({ message: 'Signin successful' });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+export const logout = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    user.authentication.sessionToken = null;
+
+    await user.save();
+
+    res.clearCookie('sessionToken');
+
+    res.json({ message: 'Logout successful' });
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });
   }

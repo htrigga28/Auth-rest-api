@@ -11,7 +11,7 @@ Content-Type: application/json
 GET http://localhost:5000/users
 
 ###
-GET http://localhost:5000/users/6478670199fd597b03e22f2b
+GET http://localhost:5000/users/6479cdfab3210eec096e3726
 
 ###
 POST http://localhost:5000/auth/signin
@@ -22,3 +22,5 @@ Content-Type: application/json
     "password": "test7"
 }
 
+###
+GET  http://localhost:5000/auth/logout/6479cdfab3210eec096e3726
