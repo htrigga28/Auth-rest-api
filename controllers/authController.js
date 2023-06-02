@@ -64,20 +64,22 @@ export const login = async (req, res) => {
     const { username, password } = req.body;
 
     // Find the user by username
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username }).select(
+      '+authentication.salt +authentication.password'
+    );
     if (!user) {
       return res.status(401).json({ message: "User doesn't exist" });
     }
 
     // Compare the provided password with the stored hash
 
-    const expectedHash = await bcrypt.compare(
+    const passwordMatch = await bcrypt.compare(
       password,
       user.authentication.password
     );
 
-    if (!expectedHash) {
-      return res.status(401).json({ message: 'Incorrect password' });
+    if (!passwordMatch) {
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
 
     const saltRounds = 10;
@@ -90,12 +92,10 @@ export const login = async (req, res) => {
 
     await user.save();
 
-    console.log(sessionToken);
-
     res.cookie('sessionToken', user.authentication.sessionToken, {
       domain: 'localhost',
       path: '/',
-      maxAge: 1000 * 60 * 60 * 24 * 3, // 1 week
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
     });
 
     res.json({ message: 'Signin successful' });

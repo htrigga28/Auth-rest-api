@@ -18,7 +18,7 @@ POST http://localhost:5000/auth/signin
 Content-Type: application/json
 
 {
-    "username": "test",
-    "password": "test"
+    "username": "test7",
+    "password": "test7"
 }
 
