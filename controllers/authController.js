@@ -96,6 +96,7 @@ export const login = async (req, res) => {
       domain: 'localhost',
       path: '/',
       maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+      httpOnly: true,
     });
 
     const cookies = await req.cookies;
