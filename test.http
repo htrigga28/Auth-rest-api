@@ -2,13 +2,16 @@ POST http://localhost:5000/auth/signup
 Content-Type: application/json
 
 {
-    "username": "test2",
-    "email":"test2@email.com",
-    "password": "test1"
+    "username": "test8",
+    "email":"test8@email.com",
+    "password": "test8"
 }
 
 ###
-GET http://localhost:5000/auth
+GET http://localhost:5000/users
+
+###
+GET http://localhost:5000/users/6478670199fd597b03e22f2b
 
 ###
 POST http://localhost:5000/auth/signin
@@ -18,3 +21,4 @@ Content-Type: application/json
     "username": "test",
     "password": "test"
 }
+

@@ -1,13 +1,12 @@
-import express from 'express';
-import authRoutes from './routes/authRoutes.js';
+import express, { Router } from 'express';
 import mongoose from 'mongoose';
-import http from 'http';
+import router from './routes/index.js';
 
 const app = express();
 
 app.use(express.json());
 
-app.use('/auth', authRoutes);
+app.use('/', router());
 
 const PORT = 5000;
 
@@ -21,7 +20,7 @@ mongoose
     console.log('Connected to MongoDB');
     // Start the server after connecting to the database
     app.listen(PORT, () => {
-      console.log(`Server started on port ${PORT}`);
+      console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((error) => {
